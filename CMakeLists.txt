@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
-project(untitled1)
+project(DateConverter)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled1 main.cpp test.cpp test.h)
-
-add_subdirectory(Boost_Tests)
+add_executable(DateConverter main.cpp)

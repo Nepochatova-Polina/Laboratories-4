@@ -1,12 +1,6 @@
 #include <iostream>
-#include <utility>
 
-
-using namespace std;
-
-int sum(int a, int b){ return a + b;}
-
-int main(){
+int main() {
+    std::cout << "Hello, World!" << std::endl;
     return 0;
-};
-
+}
