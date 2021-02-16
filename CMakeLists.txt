@@ -3,4 +3,6 @@ project(untitled1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled1 main.cpp Tests/test.cpp)
+add_executable(untitled1 main.cpp test.cpp test.h)
+
+add_subdirectory(Boost_Tests)
