@@ -2,16 +2,6 @@
 #include <iostream>
 #include <cmath>
 #include "vector"
-void Sum::CalcSum(int x, int y) {
-    Sum newSum;
-    newSum.x = x;
-    newSum.y = y;
-    newSum.sum = x + y;
-
-}
-
-
-
 using namespace std;
 
 
@@ -34,17 +24,34 @@ int* MathLib::stringToGray(int number,  const int inputString[]) {
 }
 
 int MathLib::NOD(int a, int b) {
-    if (a % b == 0)
+    if ( a < 0 || b < 0 ) {
+        throw std::invalid_argument( "received negative value" );
+    }
+    if(a == 0){
         return b;
-    if (b % a == 0)
+    }else if (b == 0) {
         return a;
-    if (a > b)
-        return NOD(a % b, b);
-    return NOD(a, b % a);
+    } else{
+        if (a % b == 0)
+            return b;
+        else if (b % a == 0)
+            return a;
+        else if (a > b)
+            return NOD(a % b, b);
+        return NOD(a, b % a);
+    }
 }
 
 int MathLib::NOK(int a, int b) {
-    return (a * b) / NOD(a, b);
+    if ( a < 0 || b < 0 ) {
+        throw invalid_argument( "received negative value" );
+    }
+    int x = NOD(a, b);
+    if(x == 0){
+        return x;
+    }else {
+        return (a * b) / NOD(a, b);
+    }
 }
 
 vector<int> MathLib::factorize(int x) {

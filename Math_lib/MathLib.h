@@ -29,7 +29,7 @@ static int *stringToGray(int number, const int inputString[]);
 
 static int NOD(int a, int b);
 
-int NOK(int a, int b);
+static int NOK(int a, int b);
 
 static std::vector<int> factorize(int x);
 
