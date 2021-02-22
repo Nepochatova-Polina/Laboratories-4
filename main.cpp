@@ -3,10 +3,12 @@
 using namespace std;
 
 int main() {
-   int n,k;
+   int n,k=0;
    cin >> n;
-    string x = MathLib::decToBinary(n);
-      cout << x;
-
+    vector<int> x = MathLib::findDividers(n);
+    while(k < x.size()) {
+        cout << x[k];
+        k++;
+    }
     return 0;
 }

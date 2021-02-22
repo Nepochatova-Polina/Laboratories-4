@@ -10,7 +10,6 @@ using namespace std;
 
 class MathLib {
 public:
-    static int *stringToGray(int number, const int inputString[]);
 
     static int NOD(int a, int b);
 
@@ -28,8 +27,6 @@ public:
 
     static bool isPrime(int x);
 
-    static string naturNum(int n);
-
     static int BellNum(int n, int p);
 
     static int ChineeseTheory(int *a, const int *n, int *m, int *mi, int i, int size);
@@ -45,6 +42,12 @@ public:
     static int GeometryProgressionSum(int firstEl, int ratio, int lastEl);
 
     static string decToBinary(int n);
+
+    static string binToGray( string binary);
+
+    string graytoBinary(string Gray);
+
+    static int SumOfNaturalNums(int n);
 };
 
 #endif //UNITTESTING_TUTORIAL_JULIAN_H_

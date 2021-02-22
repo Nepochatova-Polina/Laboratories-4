@@ -6,45 +6,27 @@
 using namespace std;
 
 
-int *MathLib::stringToGray(int number, const int inputString[]) {
-    int outputString[number];
-    int count = 0;
-    while (count < number) {
-        if (((inputString[count] == 0 && (inputString[count] >> 1) == 0)) ||
-            ((inputString[count] == 1 && (inputString[count] >> 1) == 1))) {
-            outputString[count] = 0;
-        } else {
-            if ((((inputString[count] == 0 && (inputString[count] >> 1) == 1))) ||
-                ((inputString[count] == 1 && (inputString[count] >> 1) == 0))) {
-                outputString[count] = 1;
-            }
-        }
-        count++;
-    }
-    return outputString;
-}
-
-vector<string> func(int number) {
-    string arr;
-    int i, j;
-    if (number <= 0)
-        throw invalid_argument("received negative value");
+//vector<string> func(int number) {
+//    string arr;
+//    int i, j;
+//    if (number <= 0)
+//        throw invalid_argument("received negative value");
+////
+////
+////    for (i = 2; i < (1 << number); i = i << 1) {
+////        for (j = i - 1; j >= 0; j--)
+////            arr.push_back(arr[j]);
+////
+////        for (j = 0; j < i; j++)
+////            arr[j] = "0" + arr[j];
+////
+////        for (j = i; j < 2 * i; j++)
+////            arr[j] = "1" + arr[j];
+////    }
+////    for (i = 0; i < arr.size(); i++)
+////        return arr;
 //
-//
-//    for (i = 2; i < (1 << number); i = i << 1) {
-//        for (j = i - 1; j >= 0; j--)
-//            arr.push_back(arr[j]);
-//
-//        for (j = 0; j < i; j++)
-//            arr[j] = "0" + arr[j];
-//
-//        for (j = i; j < 2 * i; j++)
-//            arr[j] = "1" + arr[j];
-//    }
-//    for (i = 0; i < arr.size(); i++)
-//        return arr;
-
-}
+//}
 
 int MathLib::NOD(int a, int b) {
     if (a < 0 || b < 0) {
@@ -166,19 +148,25 @@ string MathLib::ThreeOfPif() {
     return res;
 }
 
-vector<int> MathLib::findDividers(int x) {
-    vector<int> dividers;
-
-    for (int i = 1; i <= sqrt(x); i++) {
-        if (x % i == 0) {
-            dividers.push_back(i);
-            if (i * i != x) {
-                dividers.push_back(x / i);
+vector<int> MathLib::findDividers(int n) {
+    vector<int> v;
+    if(n <= 0){
+        throw invalid_argument("incorrect value");
+    }
+        if(n % 5 == 0) {
+            v.push_back(1);
+            int x = 5;
+            while (x <= n) {
+                v.push_back(x);
+                x += 5;
+            }
+        }else {
+            for (int i = 1; i <= n; i++) {
+                if (n % i == 0)
+                    v.push_back(i);
             }
         }
-    }
-
-    return dividers;
+        return v;
 }
 
 bool MathLib::isPrime(int x) {
@@ -215,19 +203,6 @@ int MathLib::GeometryProgressionSum(int firstEl, int ratio, int lastEl) {
         firstEl = firstEl * ratio;
     }
     return sum;
-}
-
-string MathLib::naturNum(int n) {
-    string res;
-    int lim1 = (n / 3) + 1;
-    int lim2;
-    for (int i = 0; i < lim1; i++) {
-        lim2 = ((n - i) / 2) + 1;
-        for (int j = i; j < lim2; j++) {
-            res += to_string(i) + " " + to_string(j) + " " + to_string(n - i - j) + " ";
-        }
-    }
-    return res;
 }
 
 
@@ -316,10 +291,10 @@ double MathLib::factorial(int num) {
 }
 
 string MathLib::decToBinary(int n) {
-    if(n == 0){
+    if (n == 0) {
         return "0";
     }
-    if(n < 0)
+    if (n < 0)
         n = n * (-1);
     string binaryNum;
     while (n > 0) {
@@ -328,4 +303,47 @@ string MathLib::decToBinary(int n) {
     }
 
     return binaryNum;
+}
+
+char xor_c(char a, char b) { return (a == b) ? '0' : '1'; }
+
+char flip(char c) { return (c == '0') ? '1' : '0'; }
+
+string MathLib::binToGray(string binary) {
+    if (binary[0] == '-') {
+        throw invalid_argument("incorrect value");
+    }
+    string Gray;
+
+    Gray += binary[0];
+    for (int i = 1; i < binary.length(); i++) {
+        Gray += xor_c(binary[i - 1], binary[i]);
+    }
+    return Gray;
+}
+
+string MathLib::graytoBinary(string Gray) {
+    if (Gray[0] == '-') {
+        throw invalid_argument("incorrect value");
+    }
+    string binary;
+    binary += Gray[0];
+    for (int i = 1; i < Gray.length(); i++) {
+        if (Gray[i] == '0') {
+            binary += binary[i - 1];
+
+        } else
+            binary += flip(binary[i - 1]);
+    }
+
+    return binary;
+}
+
+int MathLib::SumOfNaturalNums(int n) {
+    if (n < 0) {
+        throw invalid_argument("incorrect value");
+    }
+    if (n != 0)
+        return n + SumOfNaturalNums(n - 1);
+    return n;
 }
