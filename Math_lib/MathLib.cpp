@@ -2,10 +2,11 @@
 #include <iostream>
 #include <cmath>
 #include "vector"
+
 using namespace std;
 
 
-int* MathLib::stringToGray(int number,  const int inputString[]) {
+int *MathLib::stringToGray(int number, const int inputString[]) {
     int outputString[number];
     int count = 0;
     while (count < number) {
@@ -23,15 +24,37 @@ int* MathLib::stringToGray(int number,  const int inputString[]) {
     return outputString;
 }
 
+vector<string> func(int number) {
+    string arr;
+    int i, j;
+    if (number <= 0)
+        throw invalid_argument("received negative value");
+//
+//
+//    for (i = 2; i < (1 << number); i = i << 1) {
+//        for (j = i - 1; j >= 0; j--)
+//            arr.push_back(arr[j]);
+//
+//        for (j = 0; j < i; j++)
+//            arr[j] = "0" + arr[j];
+//
+//        for (j = i; j < 2 * i; j++)
+//            arr[j] = "1" + arr[j];
+//    }
+//    for (i = 0; i < arr.size(); i++)
+//        return arr;
+
+}
+
 int MathLib::NOD(int a, int b) {
-    if ( a < 0 || b < 0 ) {
-        throw std::invalid_argument( "received negative value" );
+    if (a < 0 || b < 0) {
+        throw std::invalid_argument("received negative value");
     }
-    if(a == 0){
+    if (a == 0) {
         return b;
-    }else if (b == 0) {
+    } else if (b == 0) {
         return a;
-    } else{
+    } else {
         if (a % b == 0)
             return b;
         else if (b % a == 0)
@@ -43,20 +66,19 @@ int MathLib::NOD(int a, int b) {
 }
 
 int MathLib::NOK(int a, int b) {
-    if ( a < 0 || b < 0 ) {
-        throw invalid_argument( "received negative value" );
+    if (a < 0 || b < 0) {
+        throw invalid_argument("received negative value");
     }
     int x = NOD(a, b);
-    if(x == 0){
+    if (x == 0) {
         return x;
-    }else {
+    } else {
         return (a * b) / NOD(a, b);
     }
 }
 
 vector<int> MathLib::factorize(int x) {
     vector<int> factors;
-
     for (int i = 2; i <= sqrt(x); i++) {
         while (x % i == 0) {
             factors.push_back(i);
@@ -72,7 +94,6 @@ vector<int> MathLib::factorize(int x) {
 
 int MathLib::Jacobi(int a, int n) {
     int ans;
-
     if (a == 0)
         ans = (n == 1) ? 1 : 0;
     else if (a == 2) {
@@ -95,46 +116,26 @@ int MathLib::Jacobi(int a, int n) {
     return ans;
 }
 
-string MathLib::ArmstrongNumber(int number) {
-    int sum, new_num, digits;
-    int current[100];
-    string res;
-    int precalcullated[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    if (number < 10) {
-        for (int i = 0; i <= number; i++) {
-            res += to_string(precalcullated[i]);
-        }
-    } else {
-        if (number < 153) {
-            for (int i : precalcullated) {
-                res += to_string(i) + " ";
-            }
-        } else {
-            for (int i : precalcullated) {
-                res += to_string(i) + " ";
-            }
-            for (int i = 153; i < number; i++) {
-                digits = 0;
-                new_num = i;
-                do {
-                    current[++digits] = new_num % 10;
-                    new_num /= 10;
-                } while (new_num > 0);
-                sum = 0;
-                for (int j = 1; j <= digits; j++) {
-                    sum += pow(current[j], digits);
-                }
-                if (sum == i) {
-                    return res = to_string(sum);
-                }
-            }
-        }
+
+bool MathLib::isArmstrongNum(int num) {
+    if (num == 0 || num < 0) {
+        throw invalid_argument("received negative value");
     }
-    return res;
+    int originalNum, remainder, result = 0;
+    originalNum = num;
+    while (originalNum != 0) {
+        remainder = originalNum % 10;
+        result += remainder * remainder * remainder;
+        originalNum /= 10;
+    }
+    if (result == num)
+        return true;
+    else
+        return false;
 }
 
 double MathLib::Lagranz(double **matrix, int number) {
-    double t, sum = 0, calc = 1;
+    double t = 0, sum = 0, calc = 1;
     for (int j = 0; j < number; j++) {
         for (int i = 0; i < 2; i++) {
             if (i != j) {
@@ -157,7 +158,7 @@ string MathLib::ThreeOfPif() {
         }
         sqrnbr = sqrt(candidate);
         if (candidate / sqrnbr == sqrnbr) {
-            res+=to_string(i) + " and " + to_string(j) + " and " + to_string(sqrnbr) + " ";
+            res += to_string(i) + " and " + to_string(j) + " and " + to_string(sqrnbr) + " ";
             counter++;
         }
     }
@@ -181,6 +182,9 @@ vector<int> MathLib::findDividers(int x) {
 }
 
 bool MathLib::isPrime(int x) {
+    if (x < 0 || x == 0) {
+        throw invalid_argument("received negative value");
+    }
     for (int i = 2; i <= sqrt(x); i++) {
         if (x % i == 0) {
             return false;
@@ -191,20 +195,26 @@ bool MathLib::isPrime(int x) {
 }
 
 
-int MathLib::AriphmeticSum(int n, int res) {
-    int a1 = 2, d = 2;
-    res = ((2 * a1 + d * (n - 1)) / 2) * n;
-    return res + 1;
+int MathLib::AriphmeticProgressionSum(int firstEl, int difference, int lastEl) {
+    if (lastEl < 0)
+        throw invalid_argument("received negative value");
+    int sum = 0;
+    for (int i = 0; i < lastEl; i++) {
+        sum = sum + firstEl;
+        firstEl = firstEl + difference;
+    }
+    return sum;
 }
 
-
-int MathLib::GeometrySum(int n, int k) {
-    int r = 1;
-    for (int i = n; i > 0; i--) {
-        if (r > k) r -= k;
-        r *= 2;
+int MathLib::GeometryProgressionSum(int firstEl, int ratio, int lastEl) {
+    if (lastEl < 0)
+        throw invalid_argument("received negative value");
+    int sum = 0;
+    for (int i = 0; i < lastEl; i++) {
+        sum = sum + firstEl;
+        firstEl = firstEl * ratio;
     }
-    return r;
+    return sum;
 }
 
 string MathLib::naturNum(int n) {
@@ -214,7 +224,7 @@ string MathLib::naturNum(int n) {
     for (int i = 0; i < lim1; i++) {
         lim2 = ((n - i) / 2) + 1;
         for (int j = i; j < lim2; j++) {
-            res += to_string(i) +  " " + to_string(j) + " " + to_string(n - i - j) + " ";
+            res += to_string(i) + " " + to_string(j) + " " + to_string(n - i - j) + " ";
         }
     }
     return res;
@@ -259,7 +269,7 @@ string MathLib::CarperRes(int x) {
         K_tmp /= 10;
     }
     for (int i = 0; i < n - c; i++) {
-        if (K != 0){
+        if (K != 0) {
             res += to_string(K);
         }
     }
@@ -296,11 +306,26 @@ int MathLib::ChineeseTheory(int a[], const int n[], int m[], int mi[], int i, in
     return Y = Y % M;
 }
 
-double MathLib::factorial(int num){
-    if(num < 0)
-        return 0;
+double MathLib::factorial(int num) {
+    if (num < 0)
+        throw invalid_argument("incorrect value");
     if (num == 0)
         return 1;
     else
         return num * factorial(num - 1);
+}
+
+string MathLib::decToBinary(int n) {
+    if(n == 0){
+        return "0";
+    }
+    if(n < 0)
+        n = n * (-1);
+    string binaryNum;
+    while (n > 0) {
+        binaryNum += to_string(n % 2);
+        n = n / 2;
+    }
+
+    return binaryNum;
 }

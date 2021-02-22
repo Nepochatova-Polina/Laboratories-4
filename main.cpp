@@ -3,8 +3,10 @@
 using namespace std;
 
 int main() {
-   int x,y;
-   cin >> x >> y;
-   cout <<  MathLib::NOK(x, y);
+   int n,k;
+   cin >> n;
+    string x = MathLib::decToBinary(n);
+      cout << x;
+
     return 0;
 }

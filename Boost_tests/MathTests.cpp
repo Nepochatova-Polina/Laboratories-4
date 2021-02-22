@@ -18,7 +18,7 @@ struct Math {
 };
 
 
-BOOST_AUTO_TEST_SUITE(TwoTwoFour_suite)
+BOOST_AUTO_TEST_SUITE(MathLibrary_Tests)
 
     BOOST_FIXTURE_TEST_CASE(NOK, Math) {
         BOOST_CHECK_EQUAL(newMath->NOK(3, 5), 15);
@@ -35,5 +35,58 @@ BOOST_AUTO_TEST_SUITE(TwoTwoFour_suite)
         BOOST_CHECK_THROW (newMath->NOD(-3, 1), invalid_argument);
 
     }
+    BOOST_FIXTURE_TEST_CASE(Factorial, Math) {
+        BOOST_CHECK_EQUAL(newMath->factorial(2), 2);
+        BOOST_CHECK_EQUAL(newMath->factorial(10), 3628800);
+        BOOST_CHECK_EQUAL(newMath->factorial(0), 1);
+        BOOST_CHECK_THROW(newMath->factorial(-3), invalid_argument);
+
+    }
+BOOST_FIXTURE_TEST_CASE(IsArmstrongNum, Math) {
+        BOOST_CHECK_EQUAL(newMath->isArmstrongNum(153), true);
+        BOOST_CHECK_EQUAL(newMath->isArmstrongNum(10), false);
+        BOOST_CHECK_THROW(newMath->isArmstrongNum(0), invalid_argument);
+        BOOST_CHECK_THROW(newMath->isArmstrongNum(-3), invalid_argument);
+
+    }
+
+    BOOST_FIXTURE_TEST_CASE(AriphmeticProgressionSum, Math) {
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(3,4,5), 55);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(0,3,5), 30);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(2,0,5), 10);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(20,3,0), 0);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(-2,3,10), 115);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(2,-3,10), -115);
+        BOOST_CHECK_THROW(newMath->AriphmeticProgressionSum(2,3,-10), invalid_argument);
+        BOOST_CHECK_EQUAL(newMath->AriphmeticProgressionSum(150,100,100), 510000);
+    }
+
+    BOOST_FIXTURE_TEST_CASE(GeometricProgressionSum, Math) {
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(3,4,5), 1023);
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(0,3,5), 0);
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(2,0,5), 2);
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(2,3,0), 0);
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(-2,3,5), -242);
+        BOOST_CHECK_EQUAL(newMath->GeometryProgressionSum(2,-3,5), 122);
+        BOOST_CHECK_THROW(newMath->GeometryProgressionSum(2,3,-5), invalid_argument);
+    }
+
+    BOOST_FIXTURE_TEST_CASE(IsNumberPrime, Math) {
+        BOOST_CHECK_EQUAL(newMath->isPrime(20), false);
+        BOOST_CHECK_EQUAL(newMath->isPrime(7), true);
+        BOOST_CHECK_THROW(newMath->isPrime(0), invalid_argument);
+        BOOST_CHECK_EQUAL(newMath->isPrime(4738352), false);
+        BOOST_CHECK_THROW(newMath->isPrime(-8), invalid_argument);
+
+    }
+    BOOST_FIXTURE_TEST_CASE(DecimalToBinary, Math) {
+        BOOST_CHECK_EQUAL(newMath->decToBinary(20), "00101");
+        BOOST_CHECK_EQUAL(newMath->decToBinary(1000), "0001011111");
+        BOOST_CHECK_EQUAL(newMath->decToBinary(-145), "10001001");
+        BOOST_CHECK_EQUAL(newMath->decToBinary(0), "0");
+        BOOST_CHECK_EQUAL(newMath->decToBinary(1), "1");
+
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
