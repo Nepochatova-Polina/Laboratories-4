@@ -6,28 +6,6 @@
 using namespace std;
 
 
-//vector<string> func(int number) {
-//    string arr;
-//    int i, j;
-//    if (number <= 0)
-//        throw invalid_argument("received negative value");
-////
-////
-////    for (i = 2; i < (1 << number); i = i << 1) {
-////        for (j = i - 1; j >= 0; j--)
-////            arr.push_back(arr[j]);
-////
-////        for (j = 0; j < i; j++)
-////            arr[j] = "0" + arr[j];
-////
-////        for (j = i; j < 2 * i; j++)
-////            arr[j] = "1" + arr[j];
-////    }
-////    for (i = 0; i < arr.size(); i++)
-////        return arr;
-//
-//}
-
 int MathLib::NOD(int a, int b) {
     if (a < 0 || b < 0) {
         throw std::invalid_argument("received negative value");

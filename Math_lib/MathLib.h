@@ -27,8 +27,6 @@ public:
 
     static bool isPrime(int x);
 
-    static int BellNum(int n, int p);
-
     static int ChineeseTheory(int *a, const int *n, int *m, int *mi, int i, int size);
 
     static string CarperRes(int x);
