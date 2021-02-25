@@ -251,17 +251,6 @@ string MathLib::CarperRes(int x) {
     return res;
 }
 
-int MathLib::BellNum(int n, int p) {
-    int k = 0;
-    for (int i = 1; i <= n; i++) {
-        int fact = i;
-        while (fact) {
-            fact /= p;
-            k += fact;
-        }
-    }
-    return k;
-}
 
 int MathLib::ChineeseTheory(int a[], const int n[], int m[], int mi[], int i, int size) {
     int M = 1, Y = 0;
