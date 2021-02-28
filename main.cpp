@@ -5,10 +5,8 @@ using namespace std;
 int main() {
    int n,k=0;
    cin >> n;
-    vector<int> x = MathLib::findDividers(n);
-    while(k < x.size()) {
-        cout << x[k];
-        k++;
-    }
+    string x =MathLib::factorize(n);
+       cout << x;
+
     return 0;
 }

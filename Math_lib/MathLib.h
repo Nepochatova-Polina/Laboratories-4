@@ -15,19 +15,19 @@ public:
 
     static int NOK(int a, int b);
 
-    static std::vector<int> factorize(int x);
+    static string factorize(int x);
 
     static int Jacobi(int a, int n);
 
     static double Lagranz(double **matrix, int number);
 
-    static string ThreeOfPif();
+    static string ThreeOfPif(int n);
 
     static std::vector<int> findDividers(int x);
 
     static bool isPrime(int x);
 
-    static int ChineeseTheory(int *a, const int *n, int *m, int *mi, int i, int size);
+    static int ChineeseTheory(  int *n, int *m, int *mi, int i, int size);
 
     static string CarperRes(int x);
 
@@ -43,9 +43,13 @@ public:
 
     static string binToGray( string binary);
 
-    string graytoBinary(string Gray);
+    static string graytoBinary(string Gray);
 
     static int SumOfNaturalNums(int n);
+
+    static char xor_c(char a, char b);
+
+    static char flip(char c);
 };
 
 #endif //UNITTESTING_TUTORIAL_JULIAN_H_

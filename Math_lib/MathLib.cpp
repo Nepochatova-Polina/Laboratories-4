@@ -37,19 +37,22 @@ int MathLib::NOK(int a, int b) {
     }
 }
 
-vector<int> MathLib::factorize(int x) {
-    vector<int> factors;
+string MathLib::factorize(int x) {
+    if (x == 0 || x < 0) {
+        throw invalid_argument("received negative value");
+    }
+    string result;
     for (int i = 2; i <= sqrt(x); i++) {
         while (x % i == 0) {
-            factors.push_back(i);
+            result += to_string(i) + " ";
             x /= i;
         }
     }
     if (x != 1) {
-        factors.push_back(x);
+        result += to_string(x);
     }
 
-    return factors;
+    return result;
 }
 
 int MathLib::Jacobi(int a, int n) {
@@ -108,17 +111,23 @@ double MathLib::Lagranz(double **matrix, int number) {
 }
 
 
-string MathLib::ThreeOfPif() {
+string MathLib::ThreeOfPif(int n) {
+    if(n == 0){
+        return "0";
+    }
+    if( n < 0){
+        throw invalid_argument("received negative value");
+    }
     int j, counter = 0;
     string res;
     double candidate, sqrnbr;
-    for (int i = 400; i <= 500; i++) {
-        for (j = i; j <= 500; j++) {
+    for (int i = 1; i <= n; i++) {
+        for (j = i; j <= n; j++) {
             candidate = i * i + j * j;
         }
         sqrnbr = sqrt(candidate);
         if (candidate / sqrnbr == sqrnbr) {
-            res += to_string(i) + " and " + to_string(j) + " and " + to_string(sqrnbr) + " ";
+            res += to_string(i) + " and " + to_string(j) + " and " + to_string(sqrnbr) + "      ";
             counter++;
         }
     }
@@ -184,53 +193,10 @@ int MathLib::GeometryProgressionSum(int firstEl, int ratio, int lastEl) {
 }
 
 
-string MathLib::CarperRes(int x) {
-    int K = 0, xm = 0, xM = 0, n = 0;
-    int N[11];
-    string res;
-    while (x != 0) {
-        N[n] = abs(x % 10);
-        n++;
-        x /= 10;
-    }
-    bool t = true;
-    for (int i = 0; i < 11 - 1; i++) {
-        for (int j = 0; j < 11 - i - 1; j++) {
-            if (N[j] > N[j + 1]) {
-                swap(N[j], N[j + 1]);
-            }
-        }
-    }
-    int ten = 1;
-    for (int j = 0; j < n - 1; j++) {
-        ten *= 10;
-    }
-    int ten_copy = ten;
-    for (int i = 0; i < n; i++) {
-        xm += N[i] * ten;
-        ten /= 10;
-    }
-    for (int i = n - 1; i >= 0; i--) {
-        xM += N[i] * ten_copy;
-        ten_copy /= 10;
-    }
-    K = xM - xm;
-    int c = 0;
-    int K_tmp = K;
-    while (K_tmp != 0) {
-        c++;
-        K_tmp /= 10;
-    }
-    for (int i = 0; i < n - c; i++) {
-        if (K != 0) {
-            res += to_string(K);
-        }
-    }
-    return res;
-}
 
 
-int MathLib::ChineeseTheory(int a[], const int n[], int m[], int mi[], int i, int size) {
+
+int MathLib::ChineeseTheory(  int n[], int m[], int mi[], int i, int size) {
     int M = 1, Y = 0;
     for (i = 0; i < size; i++) {
         M = M * n[i];
@@ -272,9 +238,9 @@ string MathLib::decToBinary(int n) {
     return binaryNum;
 }
 
-char xor_c(char a, char b) { return (a == b) ? '0' : '1'; }
+char MathLib::xor_c(char a, char b) { return (a == b) ? '0' : '1'; }
 
-char flip(char c) { return (c == '0') ? '1' : '0'; }
+char MathLib::flip(char c) { return (c == '0') ? '1' : '0'; }
 
 string MathLib::binToGray(string binary) {
     if (binary[0] == '-') {
@@ -284,7 +250,7 @@ string MathLib::binToGray(string binary) {
 
     Gray += binary[0];
     for (int i = 1; i < binary.length(); i++) {
-        Gray += xor_c(binary[i - 1], binary[i]);
+        Gray +=  MathLib::xor_c(binary[i - 1], binary[i]);
     }
     return Gray;
 }
@@ -300,7 +266,7 @@ string MathLib::graytoBinary(string Gray) {
             binary += binary[i - 1];
 
         } else
-            binary += flip(binary[i - 1]);
+            binary +=  MathLib::flip(binary[i - 1]);
     }
 
     return binary;

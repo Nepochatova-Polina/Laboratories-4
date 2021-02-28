@@ -97,6 +97,22 @@ BOOST_AUTO_TEST_SUITE(MathLibrary_Tests)
         BOOST_CHECK_THROW(newMath->findDividers(-15731), invalid_argument);
     }
 
+    BOOST_FIXTURE_TEST_CASE(Factorize, Math) {
+
+        BOOST_CHECK_EQUAL(newMath->factorize(33),"3 11" );
+        BOOST_CHECK_EQUAL(newMath->factorize(12121),"17 23 31" );
+        BOOST_CHECK_THROW(newMath->factorize(0), invalid_argument);
+        BOOST_CHECK_THROW(newMath->factorize(-15731), invalid_argument);
+    }
+
+    BOOST_FIXTURE_TEST_CASE(ThreeOfPifagor, Math) {
+    string x ="2 and 21 and 20.099751      3 and 21 and 20.223748      7 and 21 and 21.189620      9 and 21 and 21.931712      15 and 21 and 25.000000      16 and 21 and 25.612497      ";
+        BOOST_CHECK_EQUAL(newMath->ThreeOfPif(5), "4 and 6 and 6.403124      ");
+        BOOST_CHECK_EQUAL(newMath->ThreeOfPif(20),x );
+        BOOST_CHECK_EQUAL(newMath->ThreeOfPif(0), "0");
+        BOOST_CHECK_THROW(newMath->ThreeOfPif(-15731), invalid_argument);
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 
