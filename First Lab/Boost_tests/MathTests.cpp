@@ -2,7 +2,7 @@
 #define BOOST_TEST_MAIN
 
 #include <boost/test/unit_test.hpp>
-#include "../Math_lib/MathLib.h"
+#include "../../Math_lib/MathLib.h"
 
 struct Math {
     Math() {
