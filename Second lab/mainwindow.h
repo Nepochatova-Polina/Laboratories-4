@@ -17,7 +17,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    static QList<Queue> Hospital;
 private slots:
     void on_Monday_bt_clicked();
 
@@ -32,7 +31,10 @@ private slots:
     void on_Friday_bt_clicked();
 
 
+    void on_Add_bt_clicked();
+
 private:
+    QList<Queue> Hospital;
 
     Ui::MainWindow *ui;
 };

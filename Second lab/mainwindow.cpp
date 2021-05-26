@@ -123,3 +123,30 @@ void MainWindow::on_Saturday_bt_clicked()
 
 
 
+
+void MainWindow::on_Add_bt_clicked()
+{
+    Patient newPatient = Patient::Builder()
+                .withName("Jane")
+                .withAge(32)
+                .withHeight(165)
+                .withWeight(70)
+                .build();
+        Patient newPatient2 = Patient::Builder()
+                .withName("Yuri")
+                .withSex("male")
+                .withAge(-1)
+                .withHeight(180)
+                .withWeight(85)
+                .build();
+        auto *hospitalQueue = new Queue;
+        auto *hospitalQueue2 = new Queue;
+        hospitalQueue->addToQueue(&newPatient);
+        hospitalQueue->addToQueue(&newPatient2);
+        hospitalQueue2->addToQueue(&newPatient2);
+        hospitalQueue2->addToQueue(&newPatient);
+        Hospital.push_back(*hospitalQueue);
+        Hospital.push_back(*hospitalQueue2);
+
+}
+
