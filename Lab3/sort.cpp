@@ -4,7 +4,11 @@
 #include "iostream"
 
 using namespace std;
-
+/**
+ * @brief selection sort implementation
+ * @param array to sort
+ * @param size of array
+ */
 void sort::selectionSort(int array[], int size) {
     int j = 0;
     int tmp = 0;
@@ -20,7 +24,11 @@ void sort::selectionSort(int array[], int size) {
         array[j] = tmp;
     }
 }
-
+/**
+ * @brief bubble sort implementation
+ * @param array to sort
+ * @param size of array
+ */
 void sort::bubbleSort(int array[], int size) {
     int tmp = 0;
     for (int i = 0; i < size; i++) {
@@ -34,7 +42,11 @@ void sort::bubbleSort(int array[], int size) {
         cout << array[i] << " ";
     }
 }
-
+/**
+ * @brief Merge sort implementation
+ * @param array to sort
+ * @param size of array
+ */
 void sort::mergeSort(int array[], int size) {
     if (size > 1) {
         int middle = size / 2;
@@ -52,8 +64,13 @@ void sort::mergeSort(int array[], int size) {
         mergeSort(R, rem);
         merge(array, size, L, middle, R, rem);
     }
+    for (int i = 0; i < 20; i++) {
+        cout << array[i] << " ";
+    }
 }
-
+/**
+ * @brief help function for Merge Sort algorithm
+ */
 void sort::merge(int merged[], int size, const int L[], int lenL, const int R[], int lenR) {
     int i = 0;
     int j = 0;
@@ -75,7 +92,10 @@ void sort::merge(int merged[], int size, const int L[], int lenL, const int R[],
         }
     }
 }
-
+/**
+ *
+ * @param a b - elements for swap
+ */
 void swap(int *a, int *b) {
     int t = *a;
     *a = *b;
@@ -96,7 +116,12 @@ int sort::partition(int arr[], int size2, int size1) {
     return (i + 1);
 }
 
-
+/**
+ * @brief Quick sort implementation
+ * @param array to sort
+ * @param low - index of first element
+ * @param high - index oof last element
+ */
 void sort::quickSort(int array[], int low, int high) {
     if (low < high) {
         int pi = partition(array, low, high);

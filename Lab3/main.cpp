@@ -12,14 +12,14 @@ int main() {
     for (int &i : array) {
         i = rand() % 100;
     }
-    thread th(sort::bubbleSort,array, 19);
-
-//     t1 = chrono::high_resolution_clock::now();
-//    thread x(sort::quickSort,array, 0,20);
-//     t2 = chrono::high_resolution_clock::now();
-//     duration =chrono::duration_cast<chrono::microseconds>(t2 - t1).count();
-//    cout << endl << duration;
+    auto t1 = chrono::high_resolution_clock::now();
+    thread th(sort::bubbleSort, array, 19);
+    thread x(sort::mergeSort, array, 19);
+    auto t2 = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count();
+    cout << endl << duration;
     th.detach();
+    x.detach();
 
     return 0;
 }
