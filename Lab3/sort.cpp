@@ -1,63 +1,64 @@
 #include "sort.h"
 #include <algorithm>
 #include "cmath"
+#include "iostream"
 
 using namespace std;
 
-void sort::selectionSort(int data[], int lenD) {
+void sort::selectionSort(int array[], int size) {
     int j = 0;
     int tmp = 0;
-    for (int i = 0; i < lenD; i++) {
+    for (int i = 0; i < size; i++) {
         j = i;
-        for (int k = i; k < lenD; k++) {
-            if (data[j] > data[k]) {
+        for (int k = i; k < size; k++) {
+            if (array[j] > array[k]) {
                 j = k;
             }
         }
-        tmp = data[i];
-        data[i] = data[j];
-        data[j] = tmp;
+        tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
     }
 }
 
-void sort::bubbleSort(int data[], int lenD) {
+void sort::bubbleSort(int array[], int size) {
     int tmp = 0;
-    for (int i = 0; i < lenD; i++) {
-        for (int j = (lenD - 1); j >= (i + 1); j--) {
-            if (data[j] < data[j - 1]) {
-                swap(data[j], data[j - 1]);
-                tmp = data[j];
-                data[j] = data[j - 1];
-                data[j - 1] = tmp;
+    for (int i = 0; i < size; i++) {
+        for (int j = (size - 1); j >= (i + 1); j--) {
+            if (array[j] < array[j - 1]) {
+                swap(array[j], array[j - 1]);
             }
         }
     }
+    for (int i = 0; i < 20; i++) {
+        cout << array[i] << " ";
+    }
 }
 
-void sort::mergeSort(int data[], int lenD) {
-    if (lenD > 1) {
-        int middle = lenD / 2;
-        int rem = lenD - middle;
+void sort::mergeSort(int array[], int size) {
+    if (size > 1) {
+        int middle = size / 2;
+        int rem = size - middle;
         int *L = new int[middle];
         int *R = new int[rem];
-        for (int i = 0; i < lenD; i++) {
+        for (int i = 0; i < size; i++) {
             if (i < middle) {
-                L[i] = data[i];
+                L[i] = array[i];
             } else {
-                R[i - middle] = data[i];
+                R[i - middle] = array[i];
             }
         }
         mergeSort(L, middle);
         mergeSort(R, rem);
-        merge(data, lenD, L, middle, R, rem);
+        merge(array, size, L, middle, R, rem);
     }
 }
 
-void sort::merge(int merged[], int lenD, const int L[], int lenL, const int R[], int lenR) {
+void sort::merge(int merged[], int size, const int L[], int lenL, const int R[], int lenR) {
     int i = 0;
     int j = 0;
-    while (i < lenL || j < lenR) {
-        if (i < lenL & j < lenR) {
+    while (i < lenL || j < size) {
+        if (i < lenL & j < size) {
             if (L[i] <= R[j]) {
                 merged[i + j] = L[i];
                 i++;
@@ -75,36 +76,32 @@ void sort::merge(int merged[], int lenD, const int L[], int lenL, const int R[],
     }
 }
 
-void sort::quickSort(int *data, int len) {
-    int const lenD = len;
-    int pivot = 0;
-    int ind = lenD / 2;
-    int i, j = 0, k = 0;
-    if (lenD > 1) {
-        int *L = new int[lenD];
-        int *R = new int[lenD];
-        pivot = data[ind];
-        for (i = 0; i < lenD; i++) {
-            if (i != ind) {
-                if (data[i] < pivot) {
-                    L[j] = data[i];
-                    j++;
-                } else {
-                    R[k] = data[i];
-                    k++;
-                }
-            }
-        }
-        quickSort(L, j);
-        quickSort(R, k);
-        for (int cnt = 0; cnt < lenD; cnt++) {
-            if (cnt < j) {
-                data[cnt] = L[cnt];;
-            } else if (cnt == j) {
-                data[cnt] = pivot;
-            } else {
-                data[cnt] = R[cnt - (j + 1)];
-            }
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int sort::partition(int arr[], int size2, int size1) {
+    int pivot = arr[size1];
+    int i = (size2 - 1);
+
+    for (int j = size2; j <= size1 - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
         }
     }
+    swap(&arr[i + 1], &arr[size1]);
+    return (i + 1);
 }
+
+
+void sort::quickSort(int array[], int low, int high) {
+    if (low < high) {
+        int pi = partition(array, low, high);
+        quickSort(array, low, pi - 1);
+        quickSort(array, pi + 1, high);
+    }
+}
+
