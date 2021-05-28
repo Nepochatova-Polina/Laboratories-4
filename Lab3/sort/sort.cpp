@@ -4,6 +4,7 @@
 #include "iostream"
 
 using namespace std;
+
 /**
  * @brief selection sort implementation
  * @param array to sort
@@ -24,6 +25,7 @@ void sort::selectionSort(int array[], int size) {
         array[j] = tmp;
     }
 }
+
 /**
  * @brief bubble sort implementation
  * @param array to sort
@@ -38,60 +40,26 @@ void sort::bubbleSort(int array[], int size) {
             }
         }
     }
-    for (int i = 0; i < 20; i++) {
-        cout << array[i] << " ";
-    }
+
 }
 /**
- * @brief Merge sort implementation
+ * @brief insertion sort implementation
  * @param array to sort
  * @param size of array
  */
-void sort::mergeSort(int array[], int size) {
-    if (size > 1) {
-        int middle = size / 2;
-        int rem = size - middle;
-        int *L = new int[middle];
-        int *R = new int[rem];
-        for (int i = 0; i < size; i++) {
-            if (i < middle) {
-                L[i] = array[i];
-            } else {
-                R[i - middle] = array[i];
-            }
+void sort::insertionSort(int array[], int size) {
+    int i, key, j;
+    for (i = 1; i < size; i++) {
+        key = array[i];
+        j = i - 1;
+        while (j >= 0 && array[j] > key) {
+            array[j + 1] = array[j];
+            j = j - 1;
         }
-        mergeSort(L, middle);
-        mergeSort(R, rem);
-        merge(array, size, L, middle, R, rem);
-    }
-    for (int i = 0; i < 20; i++) {
-        cout << array[i] << " ";
+        array[j + 1] = key;
     }
 }
-/**
- * @brief help function for Merge Sort algorithm
- */
-void sort::merge(int merged[], int size, const int L[], int lenL, const int R[], int lenR) {
-    int i = 0;
-    int j = 0;
-    while (i < lenL || j < size) {
-        if (i < lenL & j < size) {
-            if (L[i] <= R[j]) {
-                merged[i + j] = L[i];
-                i++;
-            } else {
-                merged[i + j] = R[j];
-                j++;
-            }
-        } else if (i < lenL) {
-            merged[i + j] = L[i];
-            i++;
-        } else if (j < lenR) {
-            merged[i + j] = R[j];
-            j++;
-        }
-    }
-}
+
 /**
  *
  * @param a b - elements for swap

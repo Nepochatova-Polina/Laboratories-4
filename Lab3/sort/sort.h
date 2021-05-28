@@ -8,11 +8,13 @@ class sort {
 public:
     static void selectionSort(int array[], int size);
     static void bubbleSort(int array[], int size);
-    static void mergeSort(int array[], int size);
-    static void merge(int merged[], int size, const int L[], int lenL, const int R[], int lenR);
     static void quickSort(int array[], int low, int high);
     static int partition (int array[], int size2, int size1);
+    static void insertionSort(int *array, int size);
 
+    static void multiThreadFunc(int *array, int n);
+
+    static void oneThreadFunc(int *array, int n);
 
 };
 
