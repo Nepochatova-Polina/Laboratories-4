@@ -27,10 +27,10 @@ void sort::multiThreadFunc(int array[], int n) {
     auto endTime = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime).count();
     cout << endl << duration;
-    insertionTh.detach();
-    bubbleTh.detach();
-    selectionTh.detach();
-    QuickTh.detach();
+    insertionTh.join();
+    bubbleTh.join();
+    selectionTh.join();
+    QuickTh.join();
 }
 
 void sort::oneThreadFunc(int array[], int n) {
