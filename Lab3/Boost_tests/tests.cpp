@@ -4,31 +4,49 @@
 #include <boost/test/unit_test.hpp>
 #include <cstdlib>
 #include "../sort/sort.h"
-struct LN {
 
-    LN() {
-        firstNum = new sort();
-        secondNum = new sort();
+struct sorting {
+
+    sorting() {
+        arr = new sort();
     }
 
-    ~LN() {
-        delete firstNum;
-        delete secondNum;
+    ~sorting() {
+        delete arr;
     }
 
-    sort *firstNum;
-    sort *secondNum;
+    sort *arr;
 
 };
-BOOST_AUTO_TEST_SUITE(Large_Number_Tests)
+BOOST_AUTO_TEST_SUITE(SortFunctions_Tests)
 
-    BOOST_FIXTURE_TEST_CASE(Sum, LN)
+    BOOST_FIXTURE_TEST_CASE(bubble, sorting)
     {
-
-//        BOOST_CHECK_EQUAL();
+        int arrRes[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        BOOST_CHECK_EQUAL(sorting::arr->bubbleSort(sorting::arr->array, 9), arrRes);
 
     }
 
+    BOOST_FIXTURE_TEST_CASE(insertionSort, sorting)
+    {
+        int arrRes[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        BOOST_CHECK_EQUAL(sorting::arr->insertionSort(sorting::arr->array, 9), arrRes);
+
+    }
+
+    BOOST_FIXTURE_TEST_CASE(selectionSort, sorting)
+    {
+        int arrRes[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        BOOST_CHECK_EQUAL(sorting::arr->selectionSort(sorting::arr->array, 9), arrRes);
+
+    }
+
+    BOOST_FIXTURE_TEST_CASE(quickSort, sorting)
+    {
+        int arrRes[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        BOOST_CHECK_EQUAL(sorting::arr->quickSort(sorting::arr->array, 0,9), arrRes);
+
+    }
 
 BOOST_AUTO_TEST_SUITE_END()
 

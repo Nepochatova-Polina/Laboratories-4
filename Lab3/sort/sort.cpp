@@ -5,12 +5,15 @@
 
 using namespace std;
 
+sort::sort() = default;
+
+sort::~sort() = default;
 /**
  * @brief selection sort implementation
  * @param array to sort
  * @param size of array
  */
-void sort::selectionSort(int array[], int size) {
+int* sort::selectionSort(int array[], int size) {
     int j = 0;
     int tmp = 0;
     for (int i = 0; i < size; i++) {
@@ -24,6 +27,7 @@ void sort::selectionSort(int array[], int size) {
         array[i] = array[j];
         array[j] = tmp;
     }
+    return array;
 }
 
 /**
@@ -31,7 +35,7 @@ void sort::selectionSort(int array[], int size) {
  * @param array to sort
  * @param size of array
  */
-void sort::bubbleSort(int array[], int size) {
+int* sort::bubbleSort(int array[], int size) {
     int tmp = 0;
     for (int i = 0; i < size; i++) {
         for (int j = (size - 1); j >= (i + 1); j--) {
@@ -40,14 +44,14 @@ void sort::bubbleSort(int array[], int size) {
             }
         }
     }
-
+    return array;
 }
 /**
  * @brief insertion sort implementation
  * @param array to sort
  * @param size of array
  */
-void sort::insertionSort(int array[], int size) {
+int* sort::insertionSort(int array[], int size) {
     int i, key, j;
     for (i = 1; i < size; i++) {
         key = array[i];
@@ -58,6 +62,7 @@ void sort::insertionSort(int array[], int size) {
         }
         array[j + 1] = key;
     }
+    return array;
 }
 
 /**
@@ -90,11 +95,15 @@ int sort::partition(int arr[], int size2, int size1) {
  * @param low - index of first element
  * @param high - index oof last element
  */
-void sort::quickSort(int array[], int low, int high) {
+int* sort::quickSort(int array[], int low, int high) {
     if (low < high) {
         int pi = partition(array, low, high);
         quickSort(array, low, pi - 1);
         quickSort(array, pi + 1, high);
     }
+    return array;
 }
+
+
+
 

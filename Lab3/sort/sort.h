@@ -6,15 +6,20 @@
  */
 class sort {
 public:
-    static void selectionSort(int array[], int size);
-    static void bubbleSort(int array[], int size);
-    static void quickSort(int array[], int low, int high);
+    sort();
+    virtual ~sort();
+    int array[9] = {2,4,6,3,8,1,5,7,9};
+
+    static int* selectionSort(int array[], int size);
+    static int* bubbleSort(int array[], int size);
+    static int* quickSort(int array[], int low, int high);
     static int partition (int array[], int size2, int size1);
-    static void insertionSort(int *array, int size);
+    static int* insertionSort(int *array, int size);
 
     static void multiThreadFunc(int *array, int n);
 
     static void oneThreadFunc(int *array, int n);
+
 
 };
 
