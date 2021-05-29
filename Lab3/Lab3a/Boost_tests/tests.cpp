@@ -3,7 +3,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include <cstdlib>
-#include "../sort/sort.h"
+#include "sort.h"
 
 struct sorting {
 
